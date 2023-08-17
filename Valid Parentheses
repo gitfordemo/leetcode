@@ -1,0 +1,45 @@
+//Input: s = "()[]{}"
+//Output: true
+
+public class Solution {
+    public bool IsValid(string s) {
+        int index = 0;
+        string str = string.Empty;
+        while (s.Length > index)
+        {
+            char c = s[index];
+            if (c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']')
+            {
+                str += c;
+                var b = c switch
+                {
+                    ')' => Check('(', ref str),
+                    '}' => Check('{', ref str),
+                    ']' => Check('[', ref str),
+                    _ => true
+                };
+
+                if (!b)
+                    return false;
+            }
+
+            index++;
+        }
+        if (str.Length > 0) return false;
+        return true;
+    }
+
+    public static bool Check(char c, ref string s)
+    {
+        if (s.Length == 1) return false;
+        if (s[s.Length - 2] == c)
+        {
+            s = s.Remove(s.Length - 2);
+            return true;
+        }
+        return false;
+    } 
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------
