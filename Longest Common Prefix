@@ -1,0 +1,35 @@
+// Input: strs = ["flower","flow","flight"]
+// Output: "fl"
+
+
+public class Solution {
+    public string LongestCommonPrefix(string[] strs) {
+        string first = strs[0];
+        if(string.IsNullOrEmpty(first))
+            return first;
+
+        string result = string.Empty;
+        for (int i = 1; i < strs.Length; i++)
+        {
+            result = string.Empty;
+            int length = first.Length;
+
+            if (first.Length > strs[i].Length)
+                length = strs[i].Length;
+
+            for (int j = 0; j < length; j++)
+            {
+                if (strs[i][j] == first[j])
+                {
+                    result = result + first[j];
+                }
+                else break;
+            }
+            if (string.IsNullOrEmpty(result))
+                return result;
+
+            first = result;
+        }
+        return first;
+    }
+}
